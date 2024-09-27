@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Independence Day</title>
+    <style type="text/css">
+        @import url('https://fonts.googleapis.com/css2?family=Caprasimo&family=Caveat:wght@400..700&display=swap');
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+        }
+        h1{
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3rem;
+            font-family: "Caprasimo", serif;
+            font-weight: 400;
+            font-style: normal;
+            white-space: nowrap;
+            z-index: 10;
+        }
+        .wrapper{
+            position: absolute;
+            height: 100vh;
+            width: 100%;
+            background: #000;
+            transform-style: preserve-3d;
+            perspective: 700px;
+            perspective-origin: 50% 10%;
+            overflow: hidden;
+        }
+        .container{
+            position: absolute;
+            top: 0;
+            left: 25%;
+            height: 750px;
+            width: 750px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background-image: linear-gradient(to bottom, #ce6990 0% 33.3%, #fff 33.3% 66.6%, green 66.6% 100%);
+            border-radius: 50%;
+            transform-style: preserve-3d;
+            transform: rotateX(90deg);
+            animation: rotate 30s linear reverse infinite;
+        } 
+        .container::before{
+            position: absolute;
+            content: "";
+            height: 100%;
+            width: 100%;
+            background-image: radial-gradient(#0001, #000 65%)
+        }
+        @keyframes rotate{
+            0%{
+                transform: rotateY(0deg) rotateX(90deg);
+            }
+            100%{
+                transform: rotateY(-360deg) rotateX(90deg);
+            }
+        }
+        .wheel{
+            position: absolute;
+            height: 200px;
+            width: 200px;
+            border-radius: 50%;
+            border: 10px solid blue;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transform: translateZ(50px);
+            box-shadow: 0 10px 0 #0000bb, 0 10px #0000bb inset;
+            animation: animate 30s linear infinite;
+        }
+        @keyframes animate{
+            0%{
+                rotate: 0deg;
+            }
+            100%{
+                rotate: 360deg;
+            }
+        }
+        .wheel::before{
+            position: absolute;
+            content: "";
+            inset: 2px;
+            border-radius: 50%;
+            border: 3px solid blue;
+        }
+        span b{
+            position: relative;
+            height: 2px;
+            width: 2px;
+            border-radius: 50%;
+            border: 5px solid blue;
+        }
+        span b::before{
+            position: absolute;
+            content: "";
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            height: 12px;
+            width: 12px;
+            border-radius: 50%;
+            border: 2px solid blue;
+        }
+        .wheel i{
+            position: absolute;
+            top: 0;
+            height: 50%;
+            width: 6px;
+            clip-path: polygon(30% 0, 50% 0, 100% 70%, 50% 100%, 0 70%);
+            background: blue;
+            transform-origin: bottom;
+        }
+        .shadow{
+            transform: translateZ(0);
+            filter: blur(15px) grayscale(1);
+        }
+    </style>
+</head>
+<body>
+    <h1><span style="color: orange;">HAPPY</span><span style="color: white;">  INDEPENDENCE</span><span style="color: green;">  DAY</span></h1>
+    <div class="wrapper">
+        <div class="container">
+            <span class="wheel"><b></b></span>
+            <span class="wheel shadow"><b></b></span>
+        </div>
+    </div>
+    <script>
+        let wheel = document.querySelectorAll(".wheel");
+        for(let i = 0; i<24; i++){
+            wheel.forEach((item)=>{
+                let spoke= document.createElement("i");
+                spoke.style.rotate = '${i * 15}deg';
+                item.appendChild(spoke);
+            });
+        }
+    </script>
+</body>
+</html>
